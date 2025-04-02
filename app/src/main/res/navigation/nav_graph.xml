@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_calendarFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_monthlyFragment"
+            app:destination="@id/monthlyFragment" />
 
     </fragment>
 

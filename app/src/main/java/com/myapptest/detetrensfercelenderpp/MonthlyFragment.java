@@ -43,6 +43,7 @@ public class MonthlyFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         adapter = new MonthlyAdapter();
+
         recyclerView.setAdapter(adapter);
 
         executorService = Executors.newSingleThreadExecutor();
@@ -107,16 +108,15 @@ public class MonthlyFragment extends Fragment {
 */
 
 
-
     private void moveOldDataToMonthly() {
         executorService.execute(() -> {
             List<CalendarEntryC> oldEntries = viewModel.getOldEntries(); // ✅ ব্যাকগ্রাউন্ড থ্রেডে `getOldEntries()`
 
             if (oldEntries != null && !oldEntries.isEmpty()) {
-                List<MonthlyEntryC> monthlyEntries = new ArrayList<>();
+                List<CalendarEntryC> monthlyEntries = new ArrayList<>();
 
                 for (CalendarEntryC entry : oldEntries) {
-                    monthlyEntries.add(new MonthlyEntryC(
+                    monthlyEntries.add(new CalendarEntryC(
                             entry.getDate(),
                             entry.getRadioButtonColor(),
                             entry.getSpinnerValue(),
@@ -134,28 +134,52 @@ public class MonthlyFragment extends Fragment {
         requireActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                viewModel.getAllMonthlyEntries().observe(MonthlyFragment.this.getViewLifecycleOwner(), new Observer<List<MonthlyEntryC>>() {
+/*
+               viewModel.getAllMonthlyEntries().observe(MonthlyFragment.this.getViewLifecycleOwner(), new Observer<List<CalendarEntryC>>() {
                     @Override
-                    public void onChanged(List<MonthlyEntryC> entries) {
-                      //  adapter.setEntries(entries);
-                        if (entries != null) {
-                            adapter.setEntries(entries);
-                        }
+                    public void onChanged(List<CalendarEntryC> entries) {
+                     //  adapter.setEntries(entries);
+                       if (entries != null) {
+                           adapter.setEntries(entries);
+                       }
+                  }
+                });
+*/
+
+/*
+              viewModel.getAllMonthlyEntries().observe(requireActivity(), new Observer<List<CalendarEntryC>>() {
+                  @Override
+                  public void onChanged(List<CalendarEntryC> monthlyEntryCS) {
+
+                      adapter.setEntries(monthlyEntryCS);
+
+                  }
+              });
+*/
+
+                viewModel.getAllMonthlyEntries().observe(requireActivity(), new Observer<List<CalendarEntryC>>() {
+                    @Override
+                    public void onChanged(List<CalendarEntryC> calendarEntryCS) {
+
+                        adapter.setEntries(calendarEntryCS);
+
                     }
                 });
+
             }
         });
     }
 
-
     private class MonthlyAdapter extends RecyclerView.Adapter<MonthlyAdapter.ViewHolder> {
-      //  private List<CalendarEntryC> entries;
-        private List<MonthlyEntryC> entries;
+        private List<CalendarEntryC> entries;
+        // private List<MonthlyEntryC> entries;
 
-        public void setEntries(List<MonthlyEntryC> entries) {
+
+        public void setEntries(List<CalendarEntryC> entries) {
             this.entries = entries;
             notifyDataSetChanged();
         }
+
 
         @NonNull
         @Override
@@ -166,14 +190,14 @@ public class MonthlyFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            MonthlyEntryC entry = entries.get(position);
+            CalendarEntryC entry = entries.get(position);
             holder.dateTextView.setText(entry.getDate());
             holder.velueTextView.setText(entry.getEditText1());
             holder.typeTextView.setText(entry.getEditText2());
             holder.tiffinBillTextView.setText(entry.getEditText3());
 
-          //  holder.detailsTextView.setText(entry.getEditText1() + ", " + entry.getEditText2() + ", " + entry.getEditText3());
-           // holder.itemView.setBackgroundColor(entry.getColor());
+            //  holder.detailsTextView.setText(entry.getEditText1() + ", " + entry.getEditText2() + ", " + entry.getEditText3());
+            // holder.itemView.setBackgroundColor(entry.getColor());
             holder.itemView.setBackgroundColor(entry.getRadioButtonColor());
         }
 
@@ -183,7 +207,7 @@ public class MonthlyFragment extends Fragment {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            TextView dateTextView, velueTextView,typeTextView,tiffinBillTextView,nightBillTextView;
+            TextView dateTextView, velueTextView, typeTextView, tiffinBillTextView, nightBillTextView;
 
             ViewHolder(View itemView) {
                 super(itemView);
@@ -195,4 +219,5 @@ public class MonthlyFragment extends Fragment {
             }
         }
     }
+
 }

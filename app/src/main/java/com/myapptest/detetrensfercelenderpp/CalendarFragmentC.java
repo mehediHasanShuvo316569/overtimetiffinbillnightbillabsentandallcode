@@ -22,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -38,7 +39,7 @@ public class CalendarFragmentC extends Fragment {
     private RadioGroup radioGroup;
     private Spinner spinner;
     private EditText editText1, editText2, editText3;
-    private Button saveButton,showDeteBtn;
+    private Button saveButton, showDeteBtn, showmonth;
     private String selectedDate = "";
 
     @Nullable
@@ -55,6 +56,7 @@ public class CalendarFragmentC extends Fragment {
         editText3 = view.findViewById(R.id.calend_editText3);
         saveButton = view.findViewById(R.id.calend_btnSave);
         showDeteBtn = view.findViewById(R.id.calend_ShowDete);
+        showmonth = view.findViewById(R.id.calend_Showmonth);
 
 
         String[] city_list = new String[3];
@@ -77,7 +79,15 @@ public class CalendarFragmentC extends Fragment {
                 navController.navigate(R.id.action_calendarFragment_to_historyFragment);
             }
         });
+        showmonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
 
+                navController.navigate(R.id.action_calendarFragment_to_monthlyFragment);
+
+            }
+        });
 
 
         // ক্যালেন্ডার থেকে তারিখ সিলেক্ট করা
@@ -86,7 +96,9 @@ public class CalendarFragmentC extends Fragment {
 
             // চেক করা হচ্ছে তারিখে আগের কোনো ডাটা আছে কিনা
             viewModel.getEntryByDate(selectedDate).observe(getViewLifecycleOwner(), entry -> {
+
                 if (entry != null) {
+
                     editText1.setText(entry.getEditText1());
                     editText2.setText(entry.getEditText2());
                     editText3.setText(entry.getEditText3());
@@ -125,19 +137,22 @@ public class CalendarFragmentC extends Fragment {
         String text3 = editText3.getText().toString();
 
         // চেক করা হচ্ছে একই তারিখে আগের ডাটা আছে কিনা
-        viewModel.getEntryByDate(selectedDate).observe(getViewLifecycleOwner(), existingEntry -> {
-            if (existingEntry == null) {
-                // নতুন এন্ট্রি ইনসার্ট
-                CalendarEntryC entry = new CalendarEntryC(selectedDate, color, spinnerValue, text1, text2, text3);
-                viewModel.insert(entry);
-                calendarView.setDateSelected(CalendarDay.from(Integer.parseInt(selectedDate.substring(0, 4)),
-                        Integer.parseInt(selectedDate.substring(5, 7)) - 1,
-                        Integer.parseInt(selectedDate.substring(8, 10))), true);
-            } else {
-                // আগের ডাটা আপডেট
-                existingEntry = new CalendarEntryC(selectedDate, color, spinnerValue, text1, text2, text3);
-                existingEntry.setId(existingEntry.getId()); // ID অপরিবর্তিত রাখতে হবে
-                viewModel.update(existingEntry);
+        viewModel.getEntryByDate(selectedDate).observe(getViewLifecycleOwner(), new Observer<CalendarEntryC>() {
+            @Override
+            public void onChanged(CalendarEntryC existingEntry) {
+                if (existingEntry == null) {
+                    // নতুন এন্ট্রি ইনসার্ট
+                    CalendarEntryC entry = new CalendarEntryC(selectedDate, color, spinnerValue, text1, text2, text3);
+                    viewModel.insert(entry);
+                    calendarView.setDateSelected(CalendarDay.from(Integer.parseInt(selectedDate.substring(0, 4)),
+                            Integer.parseInt(selectedDate.substring(5, 7)) - 1,
+                            Integer.parseInt(selectedDate.substring(8, 10))), true);
+                } else {
+                    // আগের ডাটা আপডেট
+                    existingEntry = new CalendarEntryC(selectedDate, color, spinnerValue, text1, text2, text3);
+                    existingEntry.setId(existingEntry.getId()); // ID অপরিবর্তিত রাখতে হবে
+                    viewModel.update(existingEntry);
+                }
             }
         });
 

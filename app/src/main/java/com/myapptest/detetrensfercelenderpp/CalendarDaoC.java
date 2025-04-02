@@ -49,7 +49,7 @@ public interface CalendarDaoC {
 
     // ✅ মাসিক ডাটার জন্য নতুন এন্ট্রি যোগ করা
     @Insert
-    void insertMonthlyEntries(List<MonthlyEntryC> entries);
+    void insertMonthlyEntries(List<CalendarEntryC> entries);
 
 
     // ✅ ১ মাসের পুরনো ডাটা মুছে ফেলা
@@ -57,11 +57,19 @@ public interface CalendarDaoC {
     void deleteOldEntries();
 
 
+
     // ✅ মাসিক ডাটা ফেরত পাওয়া
     @Query("SELECT * FROM monthly_entries ORDER BY date ASC")
-    LiveData<List<MonthlyEntryC>> getAllMonthlyEntries();
+    LiveData<List<CalendarEntryC>> getAllMonthlyEntries();
 
 
+
+
+/*
+    public LiveData<List<MonthlyEntryC>> getAllMonthlyEntries() {
+        return calendarDaoC.getAllMonthlyEntries(); // ✅ `MonthlyEntryC` রিটার্ন করুন
+    }
+*/
 
 
 

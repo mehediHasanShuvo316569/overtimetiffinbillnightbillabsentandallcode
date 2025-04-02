@@ -51,7 +51,7 @@ public class CalendarViewModelC extends AndroidViewModel {
         repository.insertMonthlyEntries(entries);
     }
 */
-    public void insertMonthlyEntries(List<MonthlyEntryC> entries) {
+    public void insertMonthlyEntries(List<CalendarEntryC> entries) {
         repository.insertMonthlyEntries(entries); // ✅ `MonthlyEntryC` পাঠানো হচ্ছে
     }
 
@@ -82,25 +82,28 @@ public class CalendarViewModelC extends AndroidViewModel {
     }
 */
 
+
+
     public List<CalendarEntryC> getOldEntries() {
         return repository.getOldEntriesFromDatabase(); // ✅ পুরাতন `CalendarEntryC` ফেরত দিচ্ছে
 
     }
-     /*   // MonthlyFragment-এর সমস্ত ডাটা দেখানো
+       // MonthlyFragment-এর সমস্ত ডাটা দেখানো
         public LiveData<List<CalendarEntryC>> getAllMonthlyEntries () {
             return repository.getAllMonthlyEntries();
-        }*/
+        }
 
-    public LiveData<List<MonthlyEntryC>> getAllMonthlyEntries() {
+
+  /*  public LiveData<List<MonthlyEntryC>> getAllMonthlyEntries() {
         return repository.getAllMonthlyEntries(); // ✅ `MonthlyEntryC` ফেরত দিচ্ছে
     }
-
-/*
-
-    public List<CalendarEntryC> getOldEntries() {
-        return repository.getOldEntries(); // ✅ পুরাতন `CalendarEntryC` ফেরত দিচ্ছে
-    }
 */
+
+
+ /*   public List<CalendarEntryC> getOldEntries() {
+        return repository.getOldEntries(); // ✅ পুরাতন `CalendarEntryC` ফেরত দিচ্ছে
+    }*/
+
 
 
 

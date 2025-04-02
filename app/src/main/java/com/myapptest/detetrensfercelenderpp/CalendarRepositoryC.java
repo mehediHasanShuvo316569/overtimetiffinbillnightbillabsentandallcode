@@ -54,7 +54,7 @@ public class CalendarRepositoryC {
     }*/
 
     // MonthlyFragment-এ ডাটা ইনসার্ট করা
-    public void insertMonthlyEntries(List<MonthlyEntryC> mEntries) {
+    public void insertMonthlyEntries(List<CalendarEntryC> mEntries) {
         executorService.execute(() -> calendarDaoC.insertMonthlyEntries(mEntries));
     }
 
@@ -87,7 +87,7 @@ public class CalendarRepositoryC {
     }
 */
 
-    public LiveData<List<MonthlyEntryC>> getAllMonthlyEntries() {
+    public LiveData<List<CalendarEntryC>> getAllMonthlyEntries() {
         return calendarDaoC.getAllMonthlyEntries(); // ✅ `MonthlyEntryC` রিটার্ন করুন
     }
 

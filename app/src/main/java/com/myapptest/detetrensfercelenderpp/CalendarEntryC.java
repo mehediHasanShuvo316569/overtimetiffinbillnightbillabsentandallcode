@@ -23,10 +23,10 @@ public class CalendarEntryC {
         this.editText3 = editText3;
     }
 
-
-
-
-    //setters/////////////////////////////////////////////
+    public CalendarEntryC() {
+        //Emty Constructor
+    }
+//setters/////////////////////////////////////////////
 
     public void setDate(String date) {
         this.date = date;

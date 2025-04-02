@@ -43,8 +43,10 @@ public class HistoryFragmentC extends Fragment {
         viewModel.getAllEntries().observe(getViewLifecycleOwner(), (List<CalendarEntryC> entries) -> {
 
             adapter.setEntries(entries);
-            //counterTextView.setText(String.valueOf(entries.size()));
-
+            counterTextView.setText(String.valueOf(entries.size()));
+           // viewModel.deleteOldEntries();
+           // viewModel.clearAllEntries();
+            adapter.setEntriesEmty();
         });
 
 
@@ -53,12 +55,19 @@ public class HistoryFragmentC extends Fragment {
 
     private class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
         private List<CalendarEntryC> entries;
-        CalendarEntryC positionEntitis;
+
 
         public void setEntries(List<CalendarEntryC> entries) {
             this.entries = entries;
             notifyDataSetChanged();
         }
+        public void setEntriesEmty(List<CalendarEntryC> entri) {
+
+            this.entries = entri;
+
+            notifyDataSetChanged();
+        }
+
 
 
         @NonNull
