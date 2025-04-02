@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/calendarFragment">
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.myapptest.detetrensfercelenderpp.CalendarFragmentC"
+        android:label="Calendar"
+        tools:layout="@layout/fragment_calendar_fragmen_c">
+
+        <action
+            android:id="@+id/action_calendarFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.myapptest.detetrensfercelenderpp.HistoryFragmentC"
+        android:label="History"
+        tools:layout="@layout/fragment_history_c">
+
+        <action
+            android:id="@+id/action_historyFragment_to_monthlyFragment"
+            app:destination="@id/monthlyFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/monthlyFragment"
+        android:name="com.myapptest.detetrensfercelenderpp.MonthlyFragment"
+        android:label="Monthly Data"
+        tools:layout="@layout/fragment_monthly">
+        <action
+            android:id="@+id/action_monthlyFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
+
+</navigation>

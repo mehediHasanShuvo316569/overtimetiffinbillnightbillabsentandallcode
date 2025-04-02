@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        >
+
+        <RadioGroup
+            android:id="@+id/celender_dialog_radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/celender_dialog_radio1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Red" />
+
+            <RadioButton
+                android:id="@+id/celender_dialog_radio2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blue" />
+
+            <RadioButton
+                android:id="@+id/celender_dialog_radio3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Green" />
+
+            <RadioButton
+                android:id="@+id/celender_dialog_radio4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blue" />
+
+            <RadioButton
+                android:id="@+id/celender_dialog_radio5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Green" />
+        </RadioGroup>
+
+
+    </HorizontalScrollView>
+
+
+    <Spinner
+        android:id="@+id/celender_dialog_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:padding="10dp"
+        android:background="#ddd"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        >
+
+
+        <EditText
+            android:id="@+id/celender_dialog_editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter first text" />
+
+        <EditText
+            android:id="@+id/celender_dialog_editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter second text" />
+
+        <EditText
+            android:id="@+id/celender_dialog_editText3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter third text" />
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/celender_dialog_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Updete"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"/>
+
+</LinearLayout>

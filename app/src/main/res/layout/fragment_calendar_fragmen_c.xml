@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="#F1EAEA"
+    android:padding="16dp"
+   >
+    <!-- Material Calendar View -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/celend_calendar_View"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:mcv_calendarMode="month"
+            app:mcv_dateTextAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:mcv_tileSize="match_parent"
+            app:mcv_arrowColor="#BF6464"
+            app:mcv_selectionColor="#5965A5"
+            app:mcv_showOtherDates="none"
+            app:mcv_headerTextAppearance="@style/TextAppearance.AppCompat.Body2"
+            />
+
+    </LinearLayout>
+
+    <!-- Radio Buttons -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        >
+        <RadioGroup
+            android:id="@+id/calend_radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/calend_radio_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Red"
+                android:textColor="#03A9F4"/>
+
+            <RadioButton
+                android:id="@+id/calend_radio_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blue"
+                android:textColor="#FF9800"/>
+            <RadioButton
+                android:id="@+id/calend_radio_purple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Red"
+                android:textColor="#4CAF50"/>
+
+            <RadioButton
+                android:id="@+id/calend_radio_orange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blue"
+                android:textColor="#009688"/>
+            <RadioButton
+                android:id="@+id/calend_radio_green"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Red"
+                android:textColor="#E91E63"/>
+
+            <RadioButton
+                android:id="@+id/calend_radio_cyen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blue"
+                android:textColor="#FF9800"/>
+
+            <!-- More radio buttons -->
+        </RadioGroup>
+    </HorizontalScrollView>
+
+
+    <!-- Spinner -->
+    <Spinner
+        android:id="@+id/calend_spinner_cened"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- EditText Fields -->
+    <EditText
+        android:id="@+id/calend_editText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text"/>
+
+    <EditText
+        android:id="@+id/calend_editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text"/>
+
+    <EditText
+        android:id="@+id/calend_editText3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text"/>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/calend_btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"/>
+
+    <Button
+        android:id="@+id/calend_ShowDete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show"/>
+</LinearLayout>
+
+
+
+
+
+

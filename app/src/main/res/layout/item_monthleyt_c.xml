@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="9dp"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/date_TV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="dete"/>
+    <TextView
+        android:id="@+id/velue_TV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="velue"/>
+    <TextView
+        android:id="@+id/type_TV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="shift"/>
+    <TextView
+        android:id="@+id/tiffinBill_TV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="tiffinbill"/>
+
+    <TextView
+        android:id="@+id/nightBill_TV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="nightbill"/>
+
+
+
+</LinearLayout>
