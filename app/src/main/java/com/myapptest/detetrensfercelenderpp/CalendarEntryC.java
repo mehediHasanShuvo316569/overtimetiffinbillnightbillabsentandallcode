@@ -10,17 +10,17 @@ public class CalendarEntryC {
     private String date; // YYYY-MM-DD ফরম্যাটে তারিখ সংরক্ষণ
     private int radioButtonColor; // রেডিও বাটনের রঙ সংরক্ষণ
     private String spinnerValue;
-    private String editText1;
-    private String editText2;
-    private String editText3;
+    private double velueOtLvEbsentC;
+    private int tiffinBillC;
+    private int nightBillC;
 
-    public CalendarEntryC(String date, int radioButtonColor, String spinnerValue, String editText1, String editText2, String editText3) {
+    public CalendarEntryC(String date, int radioButtonColor, String spinnerValue, double velueOtLvEbsentC, int tiffinBillC, int nightBillC) {
         this.date = date;
         this.radioButtonColor = radioButtonColor;
         this.spinnerValue = spinnerValue;
-        this.editText1 = editText1;
-        this.editText2 = editText2;
-        this.editText3 = editText3;
+        this.velueOtLvEbsentC = velueOtLvEbsentC;
+        this.tiffinBillC = tiffinBillC;
+        this.nightBillC = nightBillC;
     }
 
     public CalendarEntryC() {
@@ -40,16 +40,16 @@ public class CalendarEntryC {
         this.spinnerValue = spinnerValue;
     }
 
-    public void setEditText1(String editText1) {
-        this.editText1 = editText1;
+    public void setVelueOtLvEbsentC(double velueOtLvEbsentC) {
+        this.velueOtLvEbsentC = velueOtLvEbsentC;
     }
 
-    public void setEditText2(String editText2) {
-        this.editText2 = editText2;
+    public void setTiffinBillC(int tiffinBillC) {
+        this.tiffinBillC = tiffinBillC;
     }
 
-    public void setEditText3(String editText3) {
-        this.editText3 = editText3;
+    public void setNightBillC(int nightBillC) {
+        this.nightBillC = nightBillC;
     }
 
 
@@ -60,7 +60,7 @@ public class CalendarEntryC {
     public String getDate() { return date; }
     public int getRadioButtonColor() { return radioButtonColor; }
     public String getSpinnerValue() { return spinnerValue; }
-    public String getEditText1() { return editText1; }
-    public String getEditText2() { return editText2; }
-    public String getEditText3() { return editText3; }
+    public double getVelueOtLvEbsentC() { return velueOtLvEbsentC; }
+    public int getTiffinBillC() { return tiffinBillC; }
+    public int getNightBillC() { return nightBillC; }
 }

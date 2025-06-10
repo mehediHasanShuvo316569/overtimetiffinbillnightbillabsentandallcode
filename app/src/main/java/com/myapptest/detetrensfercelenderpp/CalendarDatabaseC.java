@@ -11,6 +11,7 @@ public abstract class CalendarDatabaseC extends RoomDatabase {
     private static volatile CalendarDatabaseC INSTANCE;
 
     public abstract CalendarDaoC calendarDao();
+    public abstract MonthlyDataDao monthlyDataDao();
 
     public static CalendarDatabaseC getDatabase(final Context context) {
         if (INSTANCE == null) {

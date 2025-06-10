@@ -10,32 +10,36 @@ public class MonthlyEntryC {
     private String date;
     private int radioButtonColor;
     private String spinnerValue;
-    private String editText1;
-    private String editText2;
-    private String editText3;
+    private double velueOtLvEbsent;
+    private int tiffinBill;
+    private int nightBill;
 
-    public MonthlyEntryC(String date, int radioButtonColor, String spinnerValue, String editText1, String editText2, String editText3) {
+    public MonthlyEntryC(String date, int radioButtonColor, String spinnerValue, double velueOtLvEbsent, int tiffinBill, int nightBill) {
         this.date = date;
         this.radioButtonColor = radioButtonColor;
         this.spinnerValue = spinnerValue;
-        this.editText1 = editText1;
-        this.editText2 = editText2;
-        this.editText3 = editText3;
+        this.velueOtLvEbsent = velueOtLvEbsent;
+        this.tiffinBill = tiffinBill;
+        this.nightBill = nightBill;
+    }
+
+    public MonthlyEntryC() {
+        //Emty Constructor
     }
 
     public int getId() { return id; }
     public String getDate() { return date; }
     public int getRadioButtonColor() { return radioButtonColor; }
     public String getSpinnerValue() { return spinnerValue; }
-    public String getEditText1() { return editText1; }
-    public String getEditText2() { return editText2; }
-    public String getEditText3() { return editText3; }
+    public double getVelueOtLvEbsent() { return velueOtLvEbsent; }
+    public int getTiffinBill() { return tiffinBill; }
+    public int getNightBill() { return nightBill; }
 
     public void setId(int id) { this.id = id; }
     public void setDate(String date) { this.date = date; }
     public void setRadioButtonColor(int radioButtonColor) { this.radioButtonColor = radioButtonColor; }
     public void setSpinnerValue(String spinnerValue) { this.spinnerValue = spinnerValue; }
-    public void setEditText1(String editText1) { this.editText1 = editText1; }
-    public void setEditText2(String editText2) { this.editText2 = editText2; }
-    public void setEditText3(String editText3) { this.editText3 = editText3; }
+    public void setVelueOtLvEbsent(double velueOtLvEbsent) { this.velueOtLvEbsent = velueOtLvEbsent; }
+    public void setTiffinBill(int tiffinBill) { this.tiffinBill = tiffinBill; }
+    public void setNightBill(int nightBill) { this.nightBill = nightBill; }
 }

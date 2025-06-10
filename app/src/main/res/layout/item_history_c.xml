@@ -15,9 +15,25 @@
         android:textSize="14sp"/>
 
 
+    <TextView
+        android:id="@+id/history_shift_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shift"
+        android:textSize="14sp"/>
+
 
     <TextView
-        android:id="@+id/history_velue_TV"
+        android:id="@+id/history_tiffinBill_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tifin Bill"
+        android:textSize="14sp"/>
+
+
+
+    <TextView
+        android:id="@+id/history_velue_ot_TV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hour/dey"
@@ -25,24 +41,13 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/history_type_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tifin Bill"
-        android:textSize="14sp"/>
-    <TextView
-        android:id="@+id/history_tiffinBill_TV"
+        android:id="@+id/history_nightBill_TV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Night Bill"
         android:textSize="14sp"/>
 
-    <TextView
-        android:id="@+id/history_nightBill_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Details"
-        android:textSize="14sp"/>
+
 
 
 

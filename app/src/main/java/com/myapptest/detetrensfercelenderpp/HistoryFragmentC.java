@@ -13,17 +13,22 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HistoryFragmentC extends Fragment {
     private CalendarViewModelC viewModel;
     private RecyclerView recyclerView;
     private TextView counterTextView;
-    private HistoryAdapter adapter;
+    private HistoryAdapter historyAdapter;
 
     @Nullable
     @Override
@@ -36,105 +41,79 @@ public class HistoryFragmentC extends Fragment {
 
         counterTextView = view.findViewById(R.id.counterTV);
 
-        adapter = new HistoryAdapter();
-        recyclerView.setAdapter(adapter);
 
-        // ডাটাবেজ থেকে ডাটা লোড করা
-        viewModel.getAllEntries().observe(getViewLifecycleOwner(), (List<CalendarEntryC> entries) -> {
 
-            adapter.setEntries(entries);
-            counterTextView.setText(String.valueOf(entries.size()));
-           // viewModel.deleteOldEntries();
-           // viewModel.clearAllEntries();
-            adapter.setEntriesEmty();
+        historyAdapter = new HistoryAdapter(
+                requireContext(),
+                new ArrayList<>(),
+                updatedEntry -> viewModel.update(updatedEntry),
+                new HistoryAdapter.OnItemDeleteOrUndoListener() {
+                    @Override
+                    public void onDelete(CalendarEntryC entry) {
+                        viewModel.delete(entry);
+                    }
+
+                    @Override
+                    public void onUndo(CalendarEntryC entry) {
+                        viewModel.insertDEly(entry);
+                    }
+                }
+        );
+        recyclerView.setAdapter(historyAdapter);
+
+        viewModel.getAllCalendarEntries().observe(getViewLifecycleOwner(), calendarEntryCS -> {
+            historyAdapter.setEntries(calendarEntryCS);
+            counterTextView.setText(String.valueOf(calendarEntryCS.size()));
+            viewModel.checkMonthEndAndMoveData();
         });
 
+
+
+
+
+
+
+
+
+
+
+
+        // historyAdapter = new HistoryAdapter(requireContext());
+        //recyclerView.setAdapter(historyAdapter);
+
+
+/*
+
+        historyAdapter = new HistoryAdapter(
+                requireContext(),
+                new ArrayList<>(),
+                updatedEntry -> viewModel.update(updatedEntry), // Update callback
+                entry -> {
+                    if (entry != null) {
+                        viewModel.delete(entry); // Delete
+                    } else {
+                        viewModel.insertDEly(entry); // Undo (you can refine this)
+                    }
+                }
+        );
+        recyclerView.setAdapter(historyAdapter);
+
+
+
+
+        viewModel.getAllCalendarEntries().observe(getViewLifecycleOwner(), new Observer<List<CalendarEntryC>>() {
+            @Override
+            public void onChanged(List<CalendarEntryC> calendarEntryCS) {
+                historyAdapter.setEntries(calendarEntryCS);
+                counterTextView.setText(String.valueOf(calendarEntryCS.size()));
+                viewModel.checkMonthEndAndMoveData();
+            }
+        });
+
+*/
 
         return view;
     }
 
-    private class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
-        private List<CalendarEntryC> entries;
 
-
-        public void setEntries(List<CalendarEntryC> entries) {
-            this.entries = entries;
-            notifyDataSetChanged();
-        }
-        public void setEntriesEmty(List<CalendarEntryC> entri) {
-
-            this.entries = entri;
-
-            notifyDataSetChanged();
-        }
-
-
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history_c, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-            CalendarEntryC entry = entries.get(position);
-            holder.dateTextV.setText(entry.getDate());
-          //  holder.velueTextV.setText(entry.getRadioButtonColor());
-            holder.velueTextV.setTextColor(entry.getRadioButtonColor());
-            holder.typeTextV.setText(entry.getSpinnerValue());
-            holder.tiffinBillTextV.setText(entry.getEditText2());
-            holder.nightBillTextV.setText(entry.getEditText3());
-           // holder.velueTextV.setText(entry.getEditText1() + ", " + entry.getEditText2() + ", " + entry.getEditText3());
-           // holder.itemView.setBackgroundColor(entry.getColor);
-            holder.itemView.setBackgroundColor(entry.getRadioButtonColor());
-
-            holder.itemView.setOnLongClickListener(v -> {
-                showOptionsDialog(entry);
-                return true;
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return (entries != null) ? entries.size() : 0;
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-            TextView dateTextV, velueTextV,typeTextV,tiffinBillTextV,nightBillTextV;
-
-            ViewHolder(View itemView) {
-                super(itemView);
-                dateTextV = itemView.findViewById(R.id.history_date_pic);
-                velueTextV = itemView.findViewById(R.id.history_velue_TV);
-                typeTextV = itemView.findViewById(R.id.history_type_TV);
-                tiffinBillTextV = itemView.findViewById(R.id.history_tiffinBill_TV);
-                nightBillTextV = itemView.findViewById(R.id.history_nightBill_TV);
-            }
-        }
-    }
-
-    private void showOptionsDialog(CalendarEntryC entry) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("নির্বাচন করুন")
-                .setItems(new CharSequence[]{"আপডেট", "ডিলিট"}, (dialog, which) -> {
-                    if (which == 0) {
-                        showUpdateDialog(entry);
-                    } else {
-                        viewModel.delete(entry);
-                        Toast.makeText(getContext(), "ডাটা ডিলেট করা হয়েছে", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .show();
-    }
-
-    private void showUpdateDialog(CalendarEntryC entry) {
-        UpdateDialogC updateDialog = new UpdateDialogC(getContext(), entry, updatedEntry -> {
-            viewModel.update(updatedEntry);
-            Toast.makeText(getContext(), "ডাটা আপডেট করা হয়েছে", Toast.LENGTH_SHORT).show();
-        });
-        updateDialog.show();
-    }
 }

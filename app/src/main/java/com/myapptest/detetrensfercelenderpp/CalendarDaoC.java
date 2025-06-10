@@ -16,31 +16,26 @@ public interface CalendarDaoC {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(CalendarEntryC entry);
 
-
-
     @Update
     void update(CalendarEntryC entry);
 
     @Delete
     void delete(CalendarEntryC entry);
 
+    @Query("SELECT * FROM calendar_entries ORDER BY id DESC")
+    LiveData<List<CalendarEntryC>> getAllDailyData();
 
-    @Query("SELECT * FROM calendar_entries ORDER BY date ASC")
-    LiveData<List<CalendarEntryC>> getAllEntries(); // ✅ LiveData ব্যবহার করা হয়েছে
-
-
+    // ✅ এই মেথডটাই মিসিং ছিল — এখন ঠিকভাবে দেওয়া হলো
+    @Query("SELECT * FROM calendar_entries WHERE date = :date")
+    LiveData<List<CalendarEntryC>> getDataByDate(String date);
 
     @Query("SELECT * FROM calendar_entries WHERE date = :date LIMIT 1")
     LiveData<CalendarEntryC> getEntryByDate(String date); // ✅ LiveData ব্যবহার করা হয়েছে
 
-
     @Query("DELETE FROM calendar_entries")
-    void clearAllEntries();
-
-
+    void clearAllDelyEntries();
 
     //New Methods ///////////////////////////////////////////////////
-
 
     // ✅ ১ মাসের পুরনো এন্ট্রি বের করা
     @Query("SELECT * FROM calendar_entries WHERE date <= date('now', '-1 month')")
@@ -58,19 +53,13 @@ public interface CalendarDaoC {
 
 
 
-    // ✅ মাসিক ডাটা ফেরত পাওয়া
-    @Query("SELECT * FROM monthly_entries ORDER BY date ASC")
-    LiveData<List<CalendarEntryC>> getAllMonthlyEntries();
+ /*   // ✅ মাসিক ডাটা ফেরত পাওয়া
+    @Query("SELECT * FROM calendar_entries ORDER BY date ASC")
+    LiveData<List<MonthlyEntryC>> getAllMonthlyEntries();*/
 
 
-
-
-/*
-    public LiveData<List<MonthlyEntryC>> getAllMonthlyEntries() {
-        return calendarDaoC.getAllMonthlyEntries(); // ✅ `MonthlyEntryC` রিটার্ন করুন
-    }
-*/
-
+    @Query("SELECT * FROM CALENDAR_ENTRIES")
+    LiveData<List<CalendarEntryC>> getAllData(); // UI এর জন্য Safe ✅
 
 
 }

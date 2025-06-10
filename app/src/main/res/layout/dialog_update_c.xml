@@ -3,102 +3,102 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="8dp"
+    android:elevation="8dp"
+    android:background="@color/white">
+
+
+    <EditText
+        android:id="@+id/dialog_editText1"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="hour"/>
+
+<EditText
+    android:id="@+id/dialog_editText2"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+android:hint="Tiffin Bill"/>
+
+<EditText
+android:id="@+id/dialog_editText3"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+android:hint="Night Bill"/>
+
+<Spinner
+android:id="@+id/dialog_spinner"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"/>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:paddingBottom="9dp"
         >
-
         <RadioGroup
-            android:id="@+id/celender_dialog_radioGroup"
-            android:layout_width="match_parent"
+            android:id="@+id/dialog_radioGroup"
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:orientation="horizontal">
-
+            <!-- Example buttons -->
             <RadioButton
-                android:id="@+id/celender_dialog_radio1"
-                android:layout_width="wrap_content"
+                android:id="@+id/rb_red"
+                android:tag="#E4635A"
                 android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
                 android:text="Red" />
-
             <RadioButton
-                android:id="@+id/celender_dialog_radio2"
-                android:layout_width="wrap_content"
+                android:id="@+id/rb_green"
+                android:tag="#4CAF50"
                 android:layout_height="wrap_content"
-                android:text="Blue" />
-
-            <RadioButton
-                android:id="@+id/celender_dialog_radio3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Green" />
-
             <RadioButton
-                android:id="@+id/celender_dialog_radio4"
-                android:layout_width="wrap_content"
+                android:id="@+id/rb_blue"
+                android:tag="#596DD6"
                 android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
                 android:text="Blue" />
-
             <RadioButton
-                android:id="@+id/celender_dialog_radio5"
-                android:layout_width="wrap_content"
+                android:id="@+id/rb_yellow"
+                android:tag="#FFC107"
                 android:layout_height="wrap_content"
-                android:text="Green" />
+                android:layout_width="wrap_content"
+                android:text="Yellow" />
+            <!-- Add more colors -->
         </RadioGroup>
-
-
     </HorizontalScrollView>
 
 
-    <Spinner
-        android:id="@+id/celender_dialog_spinner"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:padding="10dp"
-        android:background="#ddd"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="5dp"
-        android:padding="5dp"
-        >
+        android:padding="5dp">
 
 
-        <EditText
-            android:id="@+id/celender_dialog_editText1"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/dialog_update_btn"
             android:layout_height="wrap_content"
-            android:hint="Enter first text" />
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="9dp"
+            android:backgroundTint="#47934A"
+            android:text="Update"/>
 
-        <EditText
-            android:id="@+id/celender_dialog_editText2"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/dialog_cancel_btn"
             android:layout_height="wrap_content"
-            android:hint="Enter second text" />
+            android:layout_width="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="9dp"
+            android:backgroundTint="#E8655B"
+            android:text="Cencel"
+            />
 
-        <EditText
-            android:id="@+id/celender_dialog_editText3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter third text" />
+
+    </RelativeLayout>
 
 
     </LinearLayout>
-    <Button
-        android:id="@+id/celender_dialog_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Updete"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"/>
-
-</LinearLayout>

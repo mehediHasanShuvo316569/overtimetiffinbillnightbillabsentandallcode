@@ -9,18 +9,22 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class CalendarRepositoryC {
-    // private final CalendarDaoC calendarDao;
-    //private final ExecutorService executorService;
     private final ExecutorService executorService;
     private final CalendarDaoC calendarDaoC;
+    private final MonthlyDataDao monthlyDataDao;
+    private final LiveData<List<CalendarEntryC>> allcalendarData;
+    private final LiveData<List<MonthlyEntryC>> allMonthlyData;
 
     public CalendarRepositoryC(Application application) {
         CalendarDatabaseC db = CalendarDatabaseC.getDatabase(application);
         calendarDaoC = db.calendarDao();
+        monthlyDataDao = db.monthlyDataDao();
+        allcalendarData = calendarDaoC.getAllDailyData();
+        allMonthlyData = monthlyDataDao.getAllMonthlyData();
         executorService = Executors.newSingleThreadExecutor();
     }
 
-    public void insert(CalendarEntryC entry) {
+    public void insertDely(CalendarEntryC entry) {
         executorService.execute(() -> calendarDaoC.insert(entry));
     }
 
@@ -33,25 +37,23 @@ public class CalendarRepositoryC {
     }
 
     public LiveData<List<CalendarEntryC>> getAllEntries() {
-        return calendarDaoC.getAllEntries();
+        return calendarDaoC.getAllDailyData();
     }
 
     public LiveData<CalendarEntryC> getEntryByDate(String date) {
         return calendarDaoC.getEntryByDate(date);
     }
 
-    public void clearAllEntries() {
-        executorService.execute(() -> calendarDaoC.clearAllEntries());
+
+    // Clear all daily data
+    public void clearAllDelyEntries() {
+        executorService.execute(calendarDaoC::clearAllDelyEntries);
     }
+
 
 
     //New Methods //////////;//////////////
 
-
-    // MonthlyFragment-এ ডাটা ইনসার্ট করা
-/*    public void insertMonthlyEntries(List<CalendarEntryC> entries) {
-        executorService.execute(() -> calendarDaoC.insertMonthlyEntries(entries));
-    }*/
 
     // MonthlyFragment-এ ডাটা ইনসার্ট করা
     public void insertMonthlyEntries(List<CalendarEntryC> mEntries) {
@@ -60,7 +62,7 @@ public class CalendarRepositoryC {
 
     // একমাস পুরোনো ডাটা মুছে ফেলা
     public void deleteOldEntries() {
-        executorService.execute(() -> calendarDaoC.deleteOldEntries());
+        executorService.execute(calendarDaoC::deleteOldEntries);
     }
 
 
@@ -73,24 +75,38 @@ public class CalendarRepositoryC {
 
         return oldEntries[0];
     }
-    // একমাস পুরোনো ডাটা বের করা
- /*   public List<CalendarEntryC> getOldEntries() {
-        return calendarDaoC.getOldEntries();
-    }
-*/
 
 
-    // MonthlyFragment-এর সমস্ত ডাটা দেখানো privus
 /*
-    public LiveData<List<CalendarEntryC>> getAllMonthlyEntries() {
-        return calendarDaoC.getAllMonthlyEntries();
-    }
-*/
-
-    public LiveData<List<CalendarEntryC>> getAllMonthlyEntries() {
+    public LiveData<List<MonthlyEntryC>> getAllMonthlyEntries() {
         return calendarDaoC.getAllMonthlyEntries(); // ✅ `MonthlyEntryC` রিটার্ন করুন
     }
 
+*/
+
+
+    // Insert monthly data
+    public void insertMonthly(MonthlyEntryC data) {
+        Executors.newSingleThreadExecutor().execute(() -> monthlyDataDao.insert(data));
+    }
+
+    // Get all daily data
+    public LiveData<List<CalendarEntryC>> getAllDailyData() {
+        return allcalendarData;
+    }
+    public LiveData<List<CalendarEntryC>> getTodayData(String date) {
+        return calendarDaoC.getDataByDate(date);
+    }
+    public LiveData<List<MonthlyEntryC>> getMonthlyData(String month) {
+        return monthlyDataDao.getDataByMonth(month); // তুমি যে DAO ইউজ করছো
+    }
+
+
+
+    // Get all monthly data
+   public LiveData<List<MonthlyEntryC>> getAllMonthlyData() {
+        return allMonthlyData;
+    }
 
 
 }

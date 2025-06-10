@@ -97,18 +97,21 @@
         android:id="@+id/calend_editText1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:hint="Enter text"/>
 
     <EditText
         android:id="@+id/calend_editText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:hint="Enter text"/>
 
     <EditText
         android:id="@+id/calend_editText3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:hint="Enter text"/>
 
     <!-- Save Button -->
